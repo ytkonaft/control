@@ -11,6 +11,7 @@
   max-width: 1420px;
   margin: 0 auto;
   padding: 0 18px;
+  display: flex;
 }
 
 header {
@@ -20,4 +21,8 @@ header {
 footer {
   min-height: 50px;
   background: PapayaWhip;
+}
+
+.col-6 {
+  width: 50%;
 }

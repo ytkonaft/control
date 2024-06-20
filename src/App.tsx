@@ -29,6 +29,32 @@ function App() {
     }
   };
 
+  const onBLEConnect = async () => {
+    if (!navigator.bluetooth) {
+      alert("Bluetooth is not supported");
+
+      return;
+    }
+
+    try {
+      navigator.bluetooth.getAvailability().then((available) => {
+        if (available) {
+          console.log("This device supports Bluetooth!");
+        } else {
+          console.log("Doh! Bluetooth is not supported");
+        }
+      });
+
+      const bleDevice = await navigator.bluetooth.requestDevice();
+
+      // const server = await bleDevice.gatt.connect();
+
+      console.log("------------bleDevice------------", bleDevice);
+    } catch (e) {
+      console.debug(e);
+    }
+  };
+
   const serialConnectHandler = () => {
     console.log("serialConnectHandler");
   };
@@ -57,22 +83,30 @@ function App() {
 
       <div className="main">
         <div className="container">
-          {ports.length && (
-            <>
-              <h3>Connected ports:</h3>
-              {ports.map((port, indx) => {
-                const info = port.getInfo();
+          <div className="col-6">
+            <div>
+              <button onClick={onSelectSerialPort}>Select serial port</button>
+            </div>
 
-                return (
-                  <div key={indx}>
-                    Port ${indx + 1}: {info.usbVendorId || "no usb vendor ID"}
-                  </div>
-                );
-              })}
-            </>
-          )}
+            {Boolean(ports.length) && (
+              <>
+                <h3>Connected ports:</h3>
+                {ports.map((port, indx) => {
+                  const info = port.getInfo();
 
-          <button onClick={onSelectSerialPort}>Select serial port</button>
+                  return (
+                    <div key={indx}>
+                      Port ${indx + 1}: {info.usbVendorId || "no usb vendor ID"}
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
+
+          <div className="col-6">
+            <button onClick={onBLEConnect}>BLE connect</button>
+          </div>
         </div>
       </div>
 
