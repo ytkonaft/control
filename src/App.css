@@ -1,6 +1,23 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.container {
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+header {
+  height: 60px;
+}
+
+footer {
+  min-height: 50px;
+  background: PapayaWhip;
 }

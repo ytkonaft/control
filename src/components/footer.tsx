@@ -1,5 +1,9 @@
 const Footer = () => {
-  return <header>Footer</header>;
+  return (
+    <header>
+      <div className="container">Footer</div>
+    </header>
+  );
 };
 
 export default Footer;
