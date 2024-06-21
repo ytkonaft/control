@@ -14,16 +14,12 @@ function App() {
     try {
       const port = await SerialApi.requestPort();
 
-      const portNames = [port].map((item) => {
-        console.log(item);
+      const info = port.getInfo();
+      const name = `${info.usbVendorId}:${info.usbProductId}`;
 
-        const info = item.getInfo();
-        const name = `${info.usbVendorId}:${info.usbProductId}`;
+      setPorts([...ports, port]);
 
-        return name;
-      });
-
-      console.log("----selected port---->", portNames);
+      console.log("----selected port---->", name);
     } catch (e) {
       // No port selected, do nothing
       console.debug(e);
